@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.adetravel.api.ApiService;
 import com.adetravel.api.RetrofitClient;
 import com.adetravel.models.Destination;
-import com.example.myapplication.R;
+import com.adetravel.client.R;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
