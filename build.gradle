@@ -1,17 +1,3 @@
-// Provide compatibility for environments running Gradle versions where
-// the deprecated DependencyHandler#module(Object) API has been removed.
-// Some plugins still invoke this method, so we recreate it dynamically
-// when absent to avoid evaluation errors on newer Gradle releases.
-def ensureModuleMethodPresent = {
-    def dependencyHandlerMetaClass = org.gradle.api.artifacts.dsl.DependencyHandler.metaClass
-    if (!dependencyHandlerMetaClass.getMetaMethod('module', [Object] as Class[])) {
-        dependencyHandlerMetaClass.module << { Object notation ->
-            delegate.create(notation)
-        }
-    }
-}
-ensureModuleMethodPresent()
-
 plugins {
     id 'com.android.application' version '8.3.2' apply false
 }
