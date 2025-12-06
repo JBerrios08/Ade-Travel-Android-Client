@@ -10,7 +10,7 @@ import com.adetravel.api.ApiService;
 import com.adetravel.api.RetrofitClient;
 import com.adetravel.models.Reservation;
 import com.adetravel.utils.SessionManager;
-import com.example.myapplication.R;
+import com.adetravel.client.R;
 import java.util.HashMap;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +35,12 @@ public class ReservationActivity extends AppCompatActivity {
         packageId = getIntent().getIntExtra("package_id", -1);
         session = new SessionManager(this);
 
+        if (packageId == -1) {
+            Toast.makeText(this, "Paquete no válido", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         btnSend.setOnClickListener(v -> submit());
     }
 
@@ -46,14 +52,27 @@ public class ReservationActivity extends AppCompatActivity {
             Toast.makeText(this, "Complete los campos", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        String token = session.getToken();
+        if (token == null) {
+            Toast.makeText(this, "Debe iniciar sesión para reservar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int paxNumber;
+        try {
+            paxNumber = Integer.parseInt(pax);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Cantidad de personas inválida", Toast.LENGTH_SHORT).show();
+            return;
+        }
         progress.setVisibility(View.VISIBLE);
         ApiService api = RetrofitClient.getClient().create(ApiService.class);
         HashMap<String, Object> body = new HashMap<>();
         body.put("paquete", packageId);
         body.put("cliente_nombre", name);
-        body.put("pax", Integer.parseInt(pax));
+        body.put("pax", paxNumber);
         body.put("fecha", date);
-        String token = session.getToken();
         api.createReservation("Token "+token, body).enqueue(new Callback<Reservation>() {
             @Override
             public void onResponse(Call<Reservation> call, Response<Reservation> response) {

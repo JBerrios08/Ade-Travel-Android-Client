@@ -10,7 +10,7 @@ import com.adetravel.api.ApiService;
 import com.adetravel.api.RetrofitClient;
 import com.adetravel.models.PackageDetail;
 import com.adetravel.utils.SessionManager;
-import com.example.myapplication.R;
+import com.adetravel.client.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +34,11 @@ public class PackageDetailActivity extends AppCompatActivity {
         btnReserve = findViewById(R.id.btnReserve);
         session = new SessionManager(this);
         packageId = getIntent().getIntExtra("package_id", -1);
+        if (packageId == -1) {
+            Toast.makeText(this, "Paquete no válido", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
         load();
         btnReserve.setOnClickListener(v -> {
             if (session.getToken()==null) {
