@@ -20,8 +20,7 @@ How to use:
 3. Build & Run. The app will attempt to call the endpoints above.
 
 Build note (sobre el error de Gradle/Android Studio):
-- La última sincronización fallaba porque el proyecto usaba Gradle 7.2 pero el plugin de Android se había subido a una versión que requería Gradle 8.x. Eso dispara el mensaje de error de "Minimum supported Gradle version" en Android Studio.
-- La solución aplicada fue bajar el Android Gradle Plugin a la 7.1.3 (compatible con Gradle 7.2), evitando la incompatibilidad de versiones en entornos que aún no usan Gradle 8.
+- El proyecto ahora usa Android Gradle Plugin 8.3.2, que es compatible con Gradle 8.4 o superior. Usa Android Studio Giraffe o más reciente, o una distribución de Gradle 8.4+ si lo ejecutas desde la línea de comandos.
 
 Notes & next steps I can do for you (optional):
 - I can add image loading previews using Glide (already added to gradle).
