@@ -1,4 +1,13 @@
 pluginManagement {
+    // Ensure compatibility with plugins that still rely on the deprecated
+    // DependencyHandler#module(Object) API, which has been removed in Gradle 9.
+    // Defining the shim here guarantees it is available before plugin
+    // resolution occurs for any subproject.
+    def dependencyHandlerMetaClass = org.gradle.api.artifacts.dsl.DependencyHandler.metaClass
+    if (!dependencyHandlerMetaClass.getMetaMethod('module', [Object] as Class[])) {
+        dependencyHandlerMetaClass.module << { Object notation -> delegate.create(notation) }
+    }
+
     repositories {
         google()
         mavenCentral()
