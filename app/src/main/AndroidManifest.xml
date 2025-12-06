@@ -16,6 +16,5 @@
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.PackageDetailActivity" />
         <activity android:name=".ui.ReservationActivity" />
-        <activity android:name=".ui.MyReservationsActivity" />
     </application>
 </manifest>

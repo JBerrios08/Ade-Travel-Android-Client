@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.adetravel.models.Reservation;
-import com.example.myapplication.R;
+import com.adetravel.client.R;
 import java.util.List;
 
 public class ReservationsAdapter extends RecyclerView.Adapter<ReservationsAdapter.VH> {
