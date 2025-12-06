@@ -19,6 +19,10 @@ How to use:
 2. In app/src/main/java/com/adetravel/api/ApiConstants.java set BASE_URL to your backend (for emulator use http://10.0.2.2:8000/).
 3. Build & Run. The app will attempt to call the endpoints above.
 
+Build note (sobre el error de Gradle/Android Studio):
+- La última sincronización fallaba porque el proyecto usaba Gradle 7.2 pero el plugin de Android se había subido a una versión que requería Gradle 8.x. Eso dispara el mensaje de error de "Minimum supported Gradle version" en Android Studio.
+- La solución aplicada fue bajar el Android Gradle Plugin a la 7.1.3 (compatible con Gradle 7.2), evitando la incompatibilidad de versiones en entornos que aún no usan Gradle 8.
+
 Notes & next steps I can do for you (optional):
 - I can add image loading previews using Glide (already added to gradle).
 - I can generate the required Django REST endpoints in your backend and add them to the ZIP so the app works out-of-the-box.
